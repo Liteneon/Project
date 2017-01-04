@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+
+<head>
+		<title>Counter-Strike: Global Offensive </title>  
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+		<link rel="stylesheet" href="http://media.steampowered.com/apps/csgo/blog/css/twentytwenty.css" type="text/css">  
+		<link rel="shortcut icon" href="http://blog.counter-strike.net/wp-content/themes/counterstrike_launch/favicon.ico" type="image/x-icon">		
+		<meta property="og:url" content="http://blog.counter-strike.net">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="Counter-Strike: Global Offensive">
+		<meta property="og:description" content="Counter-Strike: Global Offensive (CS:GO) expands upon the team-based action gameplay that it pioneered when it launched in 1999.">
+		<meta property="og:image" content="http://media.steampowered.com/apps/csgo/blog/images/fb_image.png?v=4">
+		<meta property="og:image:type" content="image/png">
+
+		
+				
+
+						
+				<link rel="stylesheet" href="http://media.steampowered.com/apps/csgo/blog/css/style.css?v=1041" type="text/css" media="screen,projection"> 
+		
+		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>-->
+		<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="http://media.steampowered.com/apps/csgo/blog/js/jquery.event.move.js"></script>
+		<script src="http://media.steampowered.com/apps/csgo/blog/js/jquery.twentytwenty.js"></script>
+		<script src="http://media.steampowered.com/apps/csgo/blog/js/jquery.cycle.all.js"></script>
+		<script src="http://media.steampowered.com/apps/csgo/blog/js/jquery.easing.1.3.js"></script>
+		
+		<script type="text/javascript">
+			$j=jQuery.noConflict();
+			$j(document).ready(function () { 
+				$j('#navigation li').hover(
+					function () {
+						$j('.dropdownItems', this).stop().fadeIn(200);
+			 
+					}, 
+					function () {
+						$j('.dropdownItems', this).stop().fadeOut(200);         
+					}
+				);
+			});
+		
+		// fading images on mouseover
+		$j(document).ready(function () {
+			$j('div.fade').hover(function() {
+				var fade = $j('> div', this);
+						
+				if (fade.is(':animated')) {
+					fade.stop().fadeTo(500, 1);
+				} 
+				else {
+			
+				  fade.fadeIn(500);
+				}
+			}, 
+			function () {
+				var fade = $j('> div', this);
+				if (fade.is(':animated')) {
+					fade.stop().fadeTo(500, 0);
+				} 
+				else {
+				  fade.fadeOut(500);
+				}
+			});
+		});
+		
+		var queryArgs = document.location.search.substring(1).split('&');
+		argsParsed = {};
+		for (i=0; i < queryArgs.length; i++)
+		{
+		    arg = unescape(queryArgs[i]);
+		    if (arg.indexOf('=') == -1)
+		    {
+		        argsParsed[arg.trim()] = true;
+		    }
+		    else
+		    {
+		        keyValuePair = arg.split('=');
+		        argsParsed[keyValuePair[0].trim()] = keyValuePair[1].trim();
+		    }
+		}
+		if ( argsParsed['clientview'] )
+		{
+			bForceClientView = true;
+		}
+		else
+		{
+			bForceClientView = false;
+		}
+
+		if ( argsParsed['perfectworld'] )
+		{
+			bForcePWView = true;
+		}
+		else
+		{
+			bForcePWView = false;
+		}
+
+
+
+		</script>
+	
+
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-33822635-7']);
+		  _gaq.push(['_setSampleRate', '1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+
+		<script>
+			// change view for client
+			$j(document).ready(function () { 
+				if ( bForceClientView || navigator.userAgent.toLowerCase().indexOf('csgo client') !== -1 )		
+				{		
+					document.getElementById('container').style.paddingTop = '100px';
+					document.getElementById('navigation_container').style.top = '50px';
+					var viewportWidth = $j(window).width();
+					var viewportHeight = $j(window).height();
+					var strSize = viewportWidth+"px "+viewportHeight+"px";
+					$j('body').css( { background:"url(http://media.steampowered.com/apps/csgo/blog/images/bggradient.png)", backgroundColor:"#192128", backgroundSize: "100% 100%",  backgroundRepeat:"no-repeat", backgroundAttachment:"fixed"} );
+					document.getElementById('searchform').style.display = 'none';
+					document.getElementById('external_links').style.display = 'none';
+					$j('a').attr('target', '_blank');					
+				}
+
+			});	
+
+
+		</script>
+	
+		
+		<script>
+	// Add Streams to Sidebar
+			var streamcount = 3;
+			$j.ajax({
+				type: 'GET',
+				url: 'https://api.twitch.tv/kraken/search/streams?limit=4&q=Counter-Strike%3A%20Global%20Offensive',
+				headers: 
+				{
+                                'Client-ID': 'a4kidpa8n9ztasq711d6dandy3ufibl'
+				},
+				//dataType: 'jsonp',
+				//data:
+				//{
+				//	'game': 'Counter-Strike: Global Offensive',
+				//	'limit': streamcount
+				//},
+			    success: function(data) 
+			    {
+					var html = '';
+					streamData = data.streams;
+					for(c=0; c<streamcount; c++)
+					{
+						html += '<div class="preview_container">';	
+						url = streamData[c].channel.url;
+						img = streamData[c].preview.small;
+						title = streamData[c].channel.status;
+						name = streamData[c].channel.display_name;
+						viewers = streamData[c].viewers;
+						html += '<a style="display:block;float:left;width:80px;height:50px;margin-right:10px;" href="' + url + '" target ="_blank"><img src="' + img + '"/></a>';
+						html += '<div class="channel_name"><a href="' + url + '" target ="_blank">' + title + '</a><br />';
+						html += '<span class="stream_viewers">' + viewers + ' viewers on ' + name + "</span></div>";
+						html += "<div style='clear:both'></div>";
+						html += '</div><!-- close preview_container -->';		
+					}
+					$j('#sidebar_streams #streams').html(html);
+			    }
+			});
+			
+			// add matches to sidebar
+			var matchcount = 4;
+			$j.ajax({
+				type: 'GET',
+				url: 'http://counter-strike.net/jsfeed/gosumatches',
+				dataType: 'json',
+				cache: true,
+				data:
+				{
+					'count': matchcount
+				},
+			    success: function(data) 
+			    {
+					var html = '';
+					for ( c = 0; c < data.length; c++ )
+					{
+						m = data[c];
+						html += '<div class="upcomingmatch">';	
+						html += '<a href="'+m.url+'" class="um_name" target="_blank">'+m.name+'</a>';
+						html += '<div class="um_time">'+m.time+'</div>';
+						for ( i = 0; i <= 1; i++ )
+						{
+							t = m.teams[i];
+							html += '<img class="um_flag'+i+'" src="http://cdn.steamcommunity.com/public/images/countryflags/'+t.country+'.gif">';
+							html += '<a href="'+m.matchUrl+'" class="um_name'+i+'" target="_blank">'+t.name+'</a>';
+						}
+						html += '<div class="um_vs">vs</div>';
+						html += '</div>';		
+					}
+					$j('#sidebar_upcoming #upcomingmatches').html(html);
+			    }
+			});
+			
+		</script>
+		<style>
+.channel_image{
+	margin: 0px 10px 15px 0;
+	float: left;
+}
+
+.channel_name{
+	padding-top:7px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height:17px;
+}
+
+.stream_viewers{
+	font-size: 12px;
+}
+.upcomingmatch {
+	position:relative;
+	width:312px;
+	height:38px;
+	line-height:16px;
+	padding-bottom:4px;
+	margin-bottom:6px;
+	border-bottom:solid rgba(151,183,209,0.1) 1px;
+	z-index:10;
+}
+.upcomingmatch a {
+	display:block;
+	position:absolute;
+	text-decoration:none;
+	z-index:20;
+}
+a.um_name {
+	font-weight:normal;
+	top:0px;
+	left:0px;
+	font-size:12px;
+	width:290px;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+a.um_name0,a.um_name1 {
+	color:#bdbdbd;
+	left:24px;
+	top:19px;
+	font-size:16px;
+	height:16px;
+	width:122px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+a.um_name0:hover, a.um_name1:hover {
+	color:#fdfdfd;
+}
+a.um_name1 {
+	left:192px;
+}
+.um_time {
+	position:absolute;
+	text-align:right;
+	top:0px;
+	right:0px;
+	color:#909090;
+	font-size:11px;
+}
+.um_flag0,.um_flag1 {
+	position:absolute;
+	width:16px;
+	height:11px;
+	left:0px;
+	top:20px;
+	border:solid #000000 1px;
+	-webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.6);
+	-moz-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.6);
+	box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.6);
+}
+.um_vs {
+	position:absolute;
+	top:20px;
+	text-align:center;
+	width:312px;
+	left:0px;
+	font-size:12px;
+	color:#606060;
+	z-index:11;
+}
+.um_flag1 {
+	left:168px;
+}
+.title_sidebar img {
+	margin-top:-1px;
+}
+.sidebar_container h5 {
+	color:#fdfdfd;
+}
+.sidebar_sub_content{
+	margin: 0 0 10px 0;
+	height: 45px;
+}
+
+#streams a {
+	font-weight: bold;
+}
+
+.preview_container{
+	position: relative;
+	padding-bottom:5px;
+}
+
+.flag{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 10;
+}
+#katowiceBanner {
+	width:312px;
+	height:138px;
+	margin:0px 0px 12px 8px;
+	position:relative;
+	background-image:url('http://media.steampowered.com/apps/csgo/images/katowicebanner/katowice_base.png');
+}
+#kb_Live,#kb_Start,#kb_Resume {
+	width:312px;
+	height:74px;
+	top:64px;
+	left:0px;
+	position:absolute;
+}
+#kb_Start {
+	background-image:url('http://media.steampowered.com/apps/csgo/images/katowicebanner/katowice_start.png');
+}
+#kb_Resume {
+	background-image:url('http://media.steampowered.com/apps/csgo/images/katowicebanner/katowice_resume.png');
+}
+#kb_Start_timer,#kb_Resume_timer {
+	position:absolute;
+	top:24px;
+}
+#kbs_days {
+	position:absolute;
+	left:25px;
+	width:30px;
+}
+#kbs_hours {
+	position:absolute;
+	left:72px;
+	width:30px;
+}
+#kbs_minutes {
+	position:absolute;
+	left:128px;
+	width:30px;
+}
+#kbs_seconds {
+	position:absolute;
+	left:192px;
+	width:30px;
+}
+#kbr_hours {
+	position:absolute;
+	left:72px;
+	width:30px;
+}
+#kbr_minutes {
+	position:absolute;
+	left:128px;
+	width:30px;
+}
+#kbr_seconds {
+	position:absolute;
+	left:192px;
+	width:30px;
+}
+</style>
+		
+	</head>
+	
+	
+<body>
+	<a id="btt" name="btt"></a>
+	<div id="container">
+		<!--<div id="cs_logo"><a href="http://blog.counter-strike.net"><img src="http://blog.counter-strike.net/wp-content/themes/counterstrike_launch/images/cs_logo.png"/></a></div>-->
+		<!--<div id="buyitnow">
+			<img src="http://media.steampowered.com/apps/csgo/blog/images/buyitnow_text.png"/>
+			<div id="buy_links">
+				<a target="_blank" class="buyitnow_text" id="steam_text" href="http://store.steampowered.com/app/730/"><span>Steam</span></a><img src="http://media.steampowered.com/apps/csgo/blog/images/divider.png"/>
+				<a target="_blank" class="buyitnow_text" id="xbox360_text" href="http://marketplace.xbox.com/en-US/Product/Counter-Strike-GO/66acd000-77fe-1000-9115-d8025841125a"><span>XBOX 360</span></a><img src="http://media.steampowered.com/apps/csgo/blog/images/divider.png" />
+				<a target="_blank" class="buyitnow_text" id="ps3_text" href="http://us.playstation.com/games-and-media/games/counter-strike-global-offensive-ps3.html"><span>PS3</span></a>
+			
+			</div>	
+		</div>-->
+		
+<div id="navigation_container">
+
+	<ul id="navigation">
+		<li><a id="nav_home" class="blog_selected" style="margin-right: 28px;" href="http://blog.counter-strike.net"><span>Blog</span></a></li>
+		<li><a id="nav_updates" href="http://blog.counter-strike.net?cat=193"><span>Updates</span></a></li>
+		<!-- resources drop down -->	
+		<li>
+			<a id="nav_resources" href="#"><span>Resources</span></a>
+			<div class="dropdownItems" id="resources_sub_nav">
+			  <a id="sub_nav_resources_about" href="http://blog.counter-strike.net/index.php/about/"><span>About</span></a><hr>
+			  <a id="sub_nav_resources_faq" href="http://blog.counter-strike.net/index.php/facts/"><span>FAQ</span></a><hr>
+			  <a id="sub_nav_resources_learn" href="http://blog.counter-strike.net/index.php/resources/"><span>Learn CS:GO</span></a>
+			</div>
+		</li>
+		<!--<li><a id="nav_history"  href="http://blog.counter-strike.net/?page_id=5420"><span>History</span></a></li>
+		<li><a id="nav_events"  href="http://blog.counter-strike.net/?page_id=24"><span>Events</span></a></li>-->
+					<li>
+				<a id="nav_community" href="#"><span>Community</span></a>
+				<div class="dropdownItems" id="community_sub_nav">
+				  <a id="sub_nav_community_hub" href="http://steamcommunity.com/app/730"><span>CS:GO Hub</span></a><hr>
+				  <a id="sub_nav_community_discussions" href="http://steamcommunity.com/app/730/discussions/"><span>Discussions</span></a><hr>
+				  <a id="sub_nav_community_screenshots" href="http://steamcommunity.com/app/730/screenshots/"><span>Screenshots</span></a><hr>
+				  <a id="sub_nav_community_artwork" href="http://steamcommunity.com/app/730/images/"><span>Artwork</span></a><hr>
+				  <a id="sub_nav_community_videos" href="http://steamcommunity.com/app/730/videos"><span>Videos</span></a><hr>
+				  <a id="sub_nav_community_workshop" href="http://steamcommunity.com/workshop/browse?appid=730&amp;browsesort=trend"><span>Workshop</span></a><hr>
+				  <a id="sub_nav_community_news" href="http://steamcommunity.com/app/730/news"><span>News</span></a><hr>
+				  <a id="sub_nav_community_guides" href="http://steamcommunity.com/app/730/guides/"><span>Guides</span></a>
+				</div>
+			</li>
+				<!-- forums drop down 	
+		<li>
+			<a id="nav_forums" href="#"><span>Forums</span></a>
+			<div class="dropdownItems" id="forum_sub_nav">
+			  <a id="sub_nav_csgo_forums" href="http://forums.steampowered.com/forums/forumdisplay.php?f=1188"><span>CS:GO Forums</span></a><hr />
+			  <a id="sub_nav_css_forums" href="http://forums.steampowered.com/forums/forumdisplay.php?f=37"><span>CSS Forums</span></a><hr />
+			  <a id="sub_nav_cs16_forums" href="http://forums.steampowered.com/forums/forumdisplay.php?f=7"><span>CS 1.6 Forums</span></a>
+			</div>
+		</li>-->
+		
+	</ul> <!-- close navigation div -->
+
+			<div id="external_links" class="">
+			<a id="icon_fb" href="http://www.facebook.com/CounterStrike"><img src="http://blog.counter-strike.net/wp-content/themes/counterstrike_launch/images/icon_fb.png"></a>
+			<a id="icon_twitter" href="http://twitter.com/csgo_dev"><img src="http://blog.counter-strike.net/wp-content/themes/counterstrike_launch/images/icon_twitter.png"></a>
+			<a id="icon_rss" href="http://blog.counter-strike.net/?feed=rss"><img src="http://blog.counter-strike.net/wp-content/themes/counterstrike_launch/images/icon_rss.png"></a>
+		</div> 
+
+		
+<form role="search" method="get" id="searchform" action="http://blog.counter-strike.net">
+	<div>
+		<input value="" name="s" id="s" class="search_textbox" type="text">
+		<input id="searchsubmit" value="" class="search_button" type="submit">
+	</div>
+</form> 
+	
+
+</div>
+
+
+		<div id="content_container">
+			<div id="blog_shadow"></div>
+			
+				<div id="main_blog">
+						<div id="post_container">
+						  
+							
+							<div class="inner_post">
+								<h2><a href="http://blog.counter-strike.net/index.php/2016/12/17343/">Easy Peasy Lemon Squeezy</a></h2>  
+									<p class="post_date">13 Dec 2016   - <img style="margin-bottom: -1px;" src="http://media.steampowered.com/apps/csgo/blog/images/tags/csgo_blog_tag.png"></p>  
+								<p><img src="http://media.steampowered.com/apps/csgo/blog/images/sas.png" alt="" width="520/"><br>
+Today we’re visually upgrading the SAS Counter-Terrorist player model. The adjustments are centered around a few core principles, including preserving character legibility and improving overall visual fidelity.</p>
+<p>Also in today’s update – some tweaked sounds to support HRTF (listen for a new bomb beep), and adjustments to the algorithm that determines how groups show up in your Public Groups panel.</p>
+<p>Take a windy walk over to Inferno and Mirage, and check out the revamped SAS!</p>
+  
+																	<div class="sharelinks">
+										<a class="sharelink" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F12%2F17343%2F&amp;t=Easy+Peasy+Lemon+Squeezy"><img src="http://media.steampowered.com/apps/csgo/blog/images/fb_like.png" alt="share on facebook"></a> &nbsp; 
+										<a class="sharelink" href="http://reddit.com/r/globaloffensive/submit?url=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F12%2F17343%2F&amp;title=Easy+Peasy+Lemon+Squeezy"><img src="http://media.steampowered.com/apps/csgo/blog/images/reddit.png" alt="submit to reddit" border="0"></a>
+									</div>
+															</div>	<!-- close inner_post div -->
+															<!-- inter-post rule -->
+								<div class="horizontal_rule"></div>
+										  
+						  
+							
+							<div class="inner_post">
+								<h2><a href="http://blog.counter-strike.net/index.php/2016/12/17260/">Holiday Season never sounded so good.</a></h2>  
+									<p class="post_date">7 Dec 2016   - <img style="margin-bottom: -1px;" src="http://media.steampowered.com/apps/csgo/blog/images/tags/csgo_blog_tag.png"></p>  
+								<p><img src="http://media.steampowered.com/apps/csgo/blog/images/hrtf.png" alt=""></p>
+<p>Today we’re introducing a new audio feature designed to substantially improve positional audio in CS:GO. The game now uses <a href="https://lmgtfy.com/?q=head-related+transfer+function"><b>HRTF</b> (head-related transfer function)</a> algorithms to enhance 360-degree vertical and horizontal sound positioning while using headphones. </p>
+<p>The default Speaker Configuration in your Audio Settings has been set to “<b>Headphones with HRTF</b>,” but if you’d like to turn HRTF off you can simply select any other speaker configuration.</p>
+<p>In other news, we’ve made an adjustment to Steam Group lobbies, now labeled “Public Lobbies.” In addition to your Steam Group Lobbies, the tab will show nearby public joinable lobbies. If you’d like to broadcast your lobby to nearby players, you can adjust permissions in your Play With Friends lobby. </p>
+<p>Ready to try out the new audio settings? Give them the ultimate test on Nuke, where we’ve just shipped a wide range of optimizations and gameplay adjustments.</p>
+<p>Happy Holidays!</p>
+  
+																	<div class="sharelinks">
+										<a class="sharelink" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F12%2F17260%2F&amp;t=Holiday+Season+never+sounded+so+good."><img src="http://media.steampowered.com/apps/csgo/blog/images/fb_like.png" alt="share on facebook"></a> &nbsp; 
+										<a class="sharelink" href="http://reddit.com/r/globaloffensive/submit?url=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F12%2F17260%2F&amp;title=Holiday+Season+never+sounded+so+good."><img src="http://media.steampowered.com/apps/csgo/blog/images/reddit.png" alt="submit to reddit" border="0"></a>
+									</div>
+															</div>	<!-- close inner_post div -->
+															<!-- inter-post rule -->
+								<div class="horizontal_rule"></div>
+										  
+						  
+							
+							<div class="inner_post">
+								<h2><a href="http://blog.counter-strike.net/index.php/2016/11/17081/">Brothers In Arms</a></h2>  
+									<p class="post_date">28 Nov 2016   - <img style="margin-bottom: -1px;" src="http://media.steampowered.com/apps/csgo/blog/images/tags/csgo_blog_tag.png"></p>  
+								<p>Today’s update includes Steam Group Lobbies — a new way to find people to play with — as well as brand new gloves, music, and more. Read on for details!</p>
+<h4>The Glove Case</h4>
+<p>Introducing the Glove Case, featuring 17 community-designed weapon finishes. Unlike previous cases, the possible Special Items in the Glove Case are 24 all-new gloves!</p>
+<p><a href="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/new_gloves_2016.jpg?v=4"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/new_gloves_2016_small.jpg?v=4" alt=""></a></p>
+<style type="text/css">
+.ssArrowLeft {
+	cursor:pointer;
+	position:absolute;
+	bottom:6px;
+	left:7px;
+	width:30px;
+	height:30px;
+	background-image:url('http://media.steampowered.com/apps/csgo/blog/images/arrows.png');
+	background-position:bottom left;
+	z-index:100;
+}
+.ssArrowLeft:hover {
+	background-position:top left;
+}
+.ssArrowRight {
+	cursor:pointer;
+	position:absolute;
+	bottom:6px;
+	right:6px;
+	width:30px;
+	height:30px;
+	background-image:url('http://media.steampowered.com/apps/csgo/blog/images/arrows.png');
+	background-position:bottom right;
+	z-index:100;
+}
+.ssArrowRight:hover {
+	background-position:top right;
+}
+.sliderContainer {
+	position:relative;
+	width:490px;
+	height:358px;
+	margin-bottom:7px;
+	overflow:hidden;
+}
+</style>
+<div style="width:490px; padding:15px; background-color:#bfbfbf; line-height:0px;">
+<div class="sliderContainer">
+<div id="comm3_left" class="ssArrowLeft"><img src="http://media.steampowered.com/apps/csgo/images/trans.gif" width="30" height="30" border="0"></div>
+<div id="comm3_right" class="ssArrowRight"><img src="http://media.steampowered.com/apps/csgo/images/trans.gif" width="30" height="30" border="0"></div>
+<div id="comm3_slider" class="picslide" style="z-index: 1; position: relative; width: 490px; height: 358px;"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/18.png" alt="" style="position: absolute; top: 0px; left: 0px; display: block; opacity: 1; z-index: 42;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/19.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 40; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/20.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 39; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/21.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 38; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/22.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 37; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/23.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 36; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/24.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 35; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/25.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 34; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/26.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 33; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/27.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 32; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/28.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 31; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/29.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 30; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/30.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 29; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/31.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 28; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/32.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 27; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/33.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 26; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/34.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 25; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/35.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 24; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/36.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 23; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/37.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 22; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/38.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 21; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/39.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 20; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/40.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 19; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/41.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 18; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/01.png?v=2" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 17; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/02.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 16; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/03.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 15; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/04.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 14; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/05.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 13; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/06.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 12; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/07.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 11; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/08.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 10; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/09.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 9; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/10.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 8; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/11.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 7; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/12.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 6; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/13.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 5; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/14.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 4; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/15.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 3; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/16.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 2; opacity: 0;" width="490" height="358"><img src="http://media.steampowered.com/apps/csgo/blog/images/glove_collection/17.png" alt="" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 1; opacity: 0;" width="490" height="358"></div>
+</div>
+</div>
+<h4>Steam Group Lobbies</h4>
+<p>Now you have more options when it comes to choosing your teammates. In addition to partying with friends, you can now view and join lobbies created by members of the Steam Groups you belong to. Steam Group Lobbies will be listed in the Steam Groups tab on the Main Menu.</p>
+<p><img src="http://media.steampowered.com/apps/csgo/blog/images/steamgrouplobby.jpg" alt=""></p>
+<p>Create a group that reflects your CS:GO interests, or join one of the thousands of Steam Groups representing various communities, countries, languages, and common interests. </p>
+<p>For more details on Steam Group Lobbies, click here: <a href="http://blog.counter-strike.net/index.php/steam-group-lobbies/">Steam Group Lobby FAQ.</a></p>
+<h4>Music Box</h4>
+<p><img src="http://media.steampowered.com/apps/csgo/blog/images/music_box/music_box_radicals.png" alt=""><br>
+There are some new additions to the Music Kit family. </p>
+<p>Check your offers, where you’ll find the new Radicals Box. Open a box, and you’ll get a StatTrak Music Kit from one of these seven artists. Check them out!</p>
+<style>
+a.smaller {
+font-size: 14px;
+}</p>
+<p>table {
+width: 100%;
+}</p>
+</style>
+<table>
+<tbody><tr>
+<td><a href="http://redbullrecords.com/beartooth-aggressive-csgo-music-kit-2"><img src="http://media.steampowered.com/apps/csgo/blog/images/music_box/beartooth_02.png" width="130" height="130"></a></td>
+<td style="vertical-align:middle; padding-bottom:32px; width:120px;"><a href="http://redbullrecords.com/beartooth-aggressive-csgo-music-kit-2" class="smaller">Artist: Beartooth <br>Kit: Aggressive</a></td>
+<td width="15px"></td>
+<td><a href="http://redbullrecords.com/blitz-kids-the-good-youth-csgo-music-kit"><img src="http://media.steampowered.com/apps/csgo/blog/images/music_box/blitzkids_01.png" width="130" height="130"></a></td>
+<td style="vertical-align:middle; padding-bottom:32px;"><a href="http://redbullrecords.com/blitz-kids-the-good-youth-csgo-music-kit" class="smaller">Artist: Blitz Kids <br>Kit: The Good</a></td>
+</tr>
+<tr>
+<td><a href="http://www.hundredthworldwide.com/"><img src="http://media.steampowered.com/apps/csgo/blog/images/music_box/hundredth_01.png" width="130" height="130"></a></td>
+<td style="vertical-align:middle; padding-bottom:32px;"><a href="http://www.hundredthworldwide.com/" class="smaller">Artist: Hundredth <br>Kit: FREE</a></td>
+<td width="15px"></td>
+<td><a href="http://neckdeep.co/"><img src="http://media.steampowered.com/apps/csgo/blog/images/music_box/neckdeep_01.png" width="130" height="130"></a></td>
+<td style="vertical-align:middle; padding-bottom:32px;"><a href="http://neckdeep.co/" class="smaller">Artist: Neck Deep <br>Kit: Life’s Not Out to Get You</a></td>
+</tr>
+<tr><td><a href="https://www.facebook.com/roamuk/"><img src="http://media.steampowered.com/apps/csgo/blog/images/music_box/roam_01.png" width="130" height="130"></a></td>
+<td style="vertical-align:middle; padding-bottom:32px;"><a href="https://www.facebook.com/roamuk/" class="smaller">Artist: Roam <br>Kit: Backbone</a></td>
+<td width="15px"></td>
+<td><a href="http://redbullrecords.com/twin-atlantic-gla-csgo-music-kit/"><img src="http://media.steampowered.com/apps/csgo/blog/images/music_box/twinatlantic_01.png" width="130" height="130"></a></td>
+<td style="vertical-align:middle; padding-bottom:32px;"><a href="http://redbullrecords.com/twin-atlantic-gla-csgo-music-kit/" class="smaller">Artist: Twin Atlantic <br>Kit: GLA</a></td>
+</tr>
+<tr>
+<td><a href="https://www.youtube.com/watch?v=vr7nfZsuucI"><img src="http://media.steampowered.com/apps/csgo/blog/images/music_box/skog_03.png" width="130" height="130"></a></td>
+<td style="vertical-align:middle; padding-bottom:32px;"><a href="https://www.youtube.com/watch?v=vr7nfZsuucI" class="smaller">Artist: Skog <br>Kit: III-Arena</a></td>
+<td width="15px"></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><script language="javascript">
+$j(window).load(function () {
+	$j('#comm3_slider').cycle({
+	    fx:     'fade',
+	    speed:  300,
+	    next:   '#comm3_right',
+	    prev:		'#comm3_left',
+	    timeout: 0
+	});
+});
+</script></p>
+  
+																	<div class="sharelinks">
+										<a class="sharelink" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F11%2F17081%2F&amp;t=Brothers+In+Arms"><img src="http://media.steampowered.com/apps/csgo/blog/images/fb_like.png" alt="share on facebook"></a> &nbsp; 
+										<a class="sharelink" href="http://reddit.com/r/globaloffensive/submit?url=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F11%2F17081%2F&amp;title=Brothers+In+Arms"><img src="http://media.steampowered.com/apps/csgo/blog/images/reddit.png" alt="submit to reddit" border="0"></a>
+									</div>
+															</div>	<!-- close inner_post div -->
+															<!-- inter-post rule -->
+								<div class="horizontal_rule"></div>
+										  
+						  
+							
+							<div class="inner_post">
+								<h2><a href="http://blog.counter-strike.net/index.php/2016/10/16848/">First steps to the ELEAGUE Major</a></h2>  
+									<p class="post_date">28 Oct 2016   - <img style="margin-bottom: -1px;" src="http://media.steampowered.com/apps/csgo/blog/images/tags/csgo_blog_tag.png"></p>  
+								<p>This weekend, eight teams will travel to Malaysia for the <a href="http://minor.pglesports.com/">CS:GO Regional Minor Championship in Asia</a>, hosted by PGL. There, they’ll compete for an invitation to the next CS:GO Major Qualifier as well as a share of a $50,000 prize pool. </p>
+<p>The event in Malaysia is just the first step on the road to the <a href="http://blog.counter-strike.net/index.php/2016/09/16129/">ELEAGUE Major</a>, with more regions inviting qualifier teams over the next few weeks:</p>
+<p><b>Europe Regional Minor:</b> November 4th – 6th, Hosted by PGL<br>
+<b>CIS Regional Minor:</b> November 11th – 13th, Hosted by StarLadder<br>
+<b>Americas Qualifier Finals:</b> December 3rd-4th, Hosted by ELEAGUE</p>
+<p>Who will earn their invitation to the next CS:GO Major Championship Qualifier? Tune in and find out!</p>
+  
+																	<div class="sharelinks">
+										<a class="sharelink" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F10%2F16848%2F&amp;t=First+steps+to+the+ELEAGUE+Major"><img src="http://media.steampowered.com/apps/csgo/blog/images/fb_like.png" alt="share on facebook"></a> &nbsp; 
+										<a class="sharelink" href="http://reddit.com/r/globaloffensive/submit?url=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F10%2F16848%2F&amp;title=First+steps+to+the+ELEAGUE+Major"><img src="http://media.steampowered.com/apps/csgo/blog/images/reddit.png" alt="submit to reddit" border="0"></a>
+									</div>
+															</div>	<!-- close inner_post div -->
+															<!-- inter-post rule -->
+								<div class="horizontal_rule"></div>
+										  
+						  
+							
+							<div class="inner_post">
+								<h2><a href="http://blog.counter-strike.net/index.php/2016/10/16311/">Inferno Returns!</a></h2>  
+									<p class="post_date">13 Oct 2016   - <img style="margin-bottom: -1px;" src="http://media.steampowered.com/apps/csgo/blog/images/tags/csgo_blog_tag.png"></p>  
+								<p>From its iconic layout to its core gameplay, Inferno has been an instant classic and a mainstay in competitive CS:GO through the years. Click the image below to find out what’s new!</p>
+<p><a href="http://www.counter-strike.net/inferno/"><img src="http://media.steampowered.com/apps/csgo/blog/images/blog_inferno.jpg" alt=""></a></p>
+<p>Inferno is now available in the Reserves Map Group. Try it out and give us your feedback!</p>
+  
+																	<div class="sharelinks">
+										<a class="sharelink" href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F10%2F16311%2F&amp;t=Inferno+Returns%21"><img src="http://media.steampowered.com/apps/csgo/blog/images/fb_like.png" alt="share on facebook"></a> &nbsp; 
+										<a class="sharelink" href="http://reddit.com/r/globaloffensive/submit?url=http%3A%2F%2Fblog.counter-strike.net%2Findex.php%2F2016%2F10%2F16311%2F&amp;title=Inferno+Returns%21"><img src="http://media.steampowered.com/apps/csgo/blog/images/reddit.png" alt="submit to reddit" border="0"></a>
+									</div>
+															</div>	<!-- close inner_post div -->
+										  
+						  
+						</div> <!-- end post container -->
+					
+					<div class="bottom_cap">
+						<span id="older_posts"><a href="http://blog.counter-strike.net/index.php/page/2/">&lt;&lt;..Older posts</a></span>
+						
+					</div>
+				</div> <!-- close main_blog div -->
+			
+		
+			<div id="sidebar">
+	
+	
+
+	
+
+	<!-- language -->
+	<div style="position: absolute; top:-24px; right: 0px; z-index: 10; align: right; z-index: 5;">
+	<li id="icl_lang_sel_widget-1" class="widget widget_icl_lang_sel_widget"><div id="lang_sel"><ul><li><a href="#" class="lang_sel_sel icl-en">English</a> <ul><li class="icl-cs"><a href="http://blog.counter-strike.net/cs/">Čeština</a></li><li class="icl-zh-hans"><a href="http://blog.counter-strike.net/zh-hans/">简体中文</a></li><li class="icl-fi"><a href="http://blog.counter-strike.net/fi/">Suomi</a></li><li class="icl-fr"><a href="http://blog.counter-strike.net/fr/">Français</a></li><li class="icl-de"><a href="http://blog.counter-strike.net/de/">Deutsch</a></li><li class="icl-hu"><a href="http://blog.counter-strike.net/hu/">Magyar</a></li><li class="icl-ko"><a href="http://blog.counter-strike.net/ko/">한국어</a></li><li class="icl-pl"><a href="http://blog.counter-strike.net/pl/">Polski</a></li><li class="icl-pt-br"><a href="http://blog.counter-strike.net/pt-br/">Português-Brasil</a></li><li class="icl-pt-pt"><a href="http://blog.counter-strike.net/pt-pt/">Português</a></li><li class="icl-es"><a href="http://blog.counter-strike.net/es/">Español</a></li><li class="icl-ru"><a href="http://blog.counter-strike.net/ru/">Русский</a></li><li class="icl-tr"><a href="http://blog.counter-strike.net/tr/">Türkçe</a></li><li class="icl-uk"><a href="http://blog.counter-strike.net/uk/">Ukrainian</a></li><li class="icl-it"><a href="http://blog.counter-strike.net/it/">Italiano</a></li></ul></li></ul></div></li>
+	</div>
+
+	<!-- buy -->
+
+			<div id="buy">	
+			<a href="http://store.steampowered.com/app/730/" id="getcsgo"><span>get cs:go</span></a>
+			<a href="http://store.valvesoftware.com/index.php?g=1" id="getmerch"><span>get merch</span></a>
+		</div><!-- close buy -->
+		<!-- monthly uniques -->
+    <div class="sidebar_item sidebar_container">
+        <div class="title_sidebar_monthly" style="background: url(http://media.steampowered.com/apps/csgo/blog/images/sidebar_bg_hdr.png) repeat-y; height: 60px; width: 319px; padding: 12px 0px 0px 15px;">
+			    <div class="monthly" style="color: #eee; font-size: 30px; font-weight: bold; letter-spacing: .11em; padding: 0px 0px 10px 0px;">10,825,685</div> 
+                <div style="line-height: 75%; font-size: 15px; text-transform:uppercase; padding: 0px 0px 0px 0px;"><h6>Unique players last month</h6></div>
+	    </div>
+        <div style="clear:both"></div>
+    </div> <!-- close monthly uniques div -->
+
+<!-- workshop queue -->
+<div class="sidebar_item sidebar_container">	
+	<div id="sidebar_workshop_queue">
+			<h5>YOUR WORKSHOP QUEUE</h5>
+			<a href="http://steamcommunity.com/app/730/workshop/" target="_blank">VOTE</a> for your favorite community-made items.
+			<div>
+				<a href="http://steamcommunity.com/app/730/workshop/" target="_blank"><img src="http://media.steampowered.com/apps/csgo/blog/images/workshop/queue/queue.png"></a>
+			</div>	
+        	<div style="clear:both"></div>
+	</div>
+</div>
+
+<!-- streams -->
+	<div id="sidebar_streams" class="sidebar_item sidebar_container">
+		<div id="title_streams" class="title_sidebar">
+			<img src="http://media.steampowered.com/apps/csgo/blog/images/stream.png">
+			<h5>LIVE STREAMS</h5>
+		</div>
+		<div id="streams" class="sidebar_content"><div class="preview_container"><a style="display:block;float:left;width:80px;height:50px;margin-right:10px;" href="https://www.twitch.tv/shroud" target="_blank"><img src="https://static-cdn.jtvnw.net/previews-ttv/live_user_shroud-80x45.jpg"></a><div class="channel_name"><a href="https://www.twitch.tv/shroud" target="_blank">2K17  |  Follow https://twitter.com/c9shroud</a><br><span class="stream_viewers">11477 viewers on shroud</span></div><div style="clear:both"></div></div><!-- close preview_container --><div class="preview_container"><a style="display:block;float:left;width:80px;height:50px;margin-right:10px;" href="https://www.twitch.tv/terracid" target="_blank"><img src="https://static-cdn.jtvnw.net/previews-ttv/live_user_terracid-80x45.jpg"></a><div class="channel_name"><a href="https://www.twitch.tv/terracid" target="_blank">Terracid et Laink niquent les rageux</a><br><span class="stream_viewers">4062 viewers on Terracid</span></div><div style="clear:both"></div></div><!-- close preview_container --><div class="preview_container"><a style="display:block;float:left;width:80px;height:50px;margin-right:10px;" href="https://www.twitch.tv/wtcnn" target="_blank"><img src="https://static-cdn.jtvnw.net/previews-ttv/live_user_wtcnn-80x45.jpg"></a><div class="channel_name"><a href="https://www.twitch.tv/wtcnn" target="_blank">geceler bizi bekler ~(˘▾˘~)</a><br><span class="stream_viewers">3647 viewers on wtcNN</span></div><div style="clear:both"></div></div><!-- close preview_container --></div>	
+	</div> <!-- close streams div -->
+	<div id="sidebar_upcoming" class="sidebar_item sidebar_container">
+		<div id="title_upcoming" class="title_sidebar">
+			<img src="http://media.steampowered.com/apps/csgo/blog/images/upcomingmatch.png">
+			<h5>UPCOMING MATCHES</h5>
+		</div>
+		<div id="upcomingmatches" class="sidebar_content"><div class="upcomingmatch"><a href="http://www.gosugamers.net/counterstrike/events/616-esea-season-23-global-premier-challenge?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name" target="_blank">ESEA Season 23: Global Premier Challenge</a><div class="um_time">2 1h</div><img class="um_flag0" src="http://cdn.steamcommunity.com/public/images/countryflags/pl.gif"><a href="http://www.gosugamers.net/counterstrike/tournaments/13262-esea-premier-season-23-europe-and-na-finals/3752-group-stage/13263-europe/matches/153201-team-kinguin-vs-team-ldlc?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name0" target="_blank">Team Kinguin</a><img class="um_flag1" src="http://cdn.steamcommunity.com/public/images/countryflags/eu.gif"><a href="http://www.gosugamers.net/counterstrike/tournaments/13262-esea-premier-season-23-europe-and-na-finals/3752-group-stage/13263-europe/matches/153201-team-kinguin-vs-team-ldlc?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name1" target="_blank">Team LDLC</a><div class="um_vs">vs</div></div><div class="upcomingmatch"><a href="http://www.gosugamers.net/counterstrike/events/616-esea-season-23-global-premier-challenge?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name" target="_blank">ESEA Season 23: Global Premier Challenge</a><div class="um_time">1d 1h</div><img class="um_flag0" src="http://cdn.steamcommunity.com/public/images/countryflags/us.gif"><a href="http://www.gosugamers.net/counterstrike/tournaments/13262-esea-premier-season-23-europe-and-na-finals/3752-group-stage/13264-north-america/matches/153202-team-solomid-vs-team-rush?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name0" target="_blank">Team Solomid.</a><img class="um_flag1" src="http://cdn.steamcommunity.com/public/images/countryflags/us.gif"><a href="http://www.gosugamers.net/counterstrike/tournaments/13262-esea-premier-season-23-europe-and-na-finals/3752-group-stage/13264-north-america/matches/153202-team-solomid-vs-team-rush?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name1" target="_blank">Team Rush</a><div class="um_vs">vs</div></div><div class="upcomingmatch"><a href="http://www.gosugamers.net/counterstrike/events/616-esea-season-23-global-premier-challenge?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name" target="_blank">ESEA Season 23: Global Premier Challenge</a><div class="um_time">1d 18h</div><img class="um_flag0" src="http://cdn.steamcommunity.com/public/images/countryflags/za.gif"><a href="http://www.gosugamers.net/counterstrike/tournaments/13272-esea-season-23-global-premier-challenge/3755-group-stage/13273-group-a/matches/153277-bravado-gaming-vs-to-be-decided-cs?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name0" target="_blank">Bravado Gaming</a><img class="um_flag1" src="http://cdn.steamcommunity.com/public/images/countryflags/un.gif"><a href="http://www.gosugamers.net/counterstrike/tournaments/13272-esea-season-23-global-premier-challenge/3755-group-stage/13273-group-a/matches/153277-bravado-gaming-vs-to-be-decided-cs?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name1" target="_blank">To Be Decided.CS</a><div class="um_vs">vs</div></div><div class="upcomingmatch"><a href="http://www.gosugamers.net/counterstrike/events/616-esea-season-23-global-premier-challenge?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name" target="_blank">ESEA Season 23: Global Premier Challenge</a><div class="um_time">1d 20h</div><img class="um_flag0" src="http://cdn.steamcommunity.com/public/images/countryflags/dk.gif"><a href="http://www.gosugamers.net/counterstrike/tournaments/13272-esea-season-23-global-premier-challenge/3755-group-stage/13273-group-a/matches/153278-rogue-vs-to-be-decided1-cs?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name0" target="_blank">Rogue.</a><img class="um_flag1" src="http://cdn.steamcommunity.com/public/images/countryflags/un.gif"><a href="http://www.gosugamers.net/counterstrike/tournaments/13272-esea-season-23-global-premier-challenge/3755-group-stage/13273-group-a/matches/153278-rogue-vs-to-be-decided1-cs?utm_source=counter-strike.net&amp;utm_medium=ticker&amp;utm_campaign=ticker" class="um_name1" target="_blank">To Be Decided1.CS</a><div class="um_vs">vs</div></div></div>
+	</div>
+	<!-- update history -->
+
+
+	<div id="update_history" class="sidebar_item sidebar_container">	
+		<a href="http://www.counter-strike.net/inferno/" id="update_inferno"><span>New Inferno</span></a>
+		<a href="http://www.counter-strike.net/operationwildfire/" id="update_wildfire"><span>Operation Wildfire</span></a>
+		<a href="http://www.counter-strike.net/reintroducing_nuke/" id="update_nuke"><span>Nuke is back</span></a>
+		<a href="http://www.counter-strike.net/operationbloodhound/" id="update_bloodhound"><span>Operation Bloodhound</span></a>
+		<a href="http://www.counter-strike.net/operationvanguard/" id="update_vanguard"><span>Operation Vanguard</span></a>
+		<a href="http://www.counter-strike.net/reintroducing_train" id="update_train"><span>Reintroducing Train</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2014/11/10986/" id="update_dreamhack2014"><span>Dreamhack Winter CS:GO Championship - 2014</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2014/08/10177/" id="update_cologne2014"><span>ESL One CS:GO Championship - Cologne 2014</span></a>
+		<a href="http://www.counter-strike.net/operationbreakout/" id="update_breakout"><span>Operation Breakout Update</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2014/03/9105/" id="update_katowice2014"><span>EMS One CS:GO Championship - Katowice 2014</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2014/02/8768/" id="update_phoenix"><span>Operation Phoenix Update</span></a>
+		<!--a href="http://blog.counter-strike.net/index.php/2014/05/9466/" id="update_huntsman"><span>The Huntsman Update</span></a-->
+		<a href="http://blog.counter-strike.net/index.php/2014/02/8805/" id="update_stickers"><span>Stickers Workshop Update</span></a>		<a href="http://blog.counter-strike.net/index.php/2014/02/8644/" id="update_cz"><span>Introducing the cz75-auto</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2013/12/8348/" id="update_winter_offensive"><span>The winter offensive holiday update</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2013/12/8306/" id="update_2maps"><span>Introducing Cobblestone and Overpass</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2013/12/8278/" id="update_dreamhack2013"><span>FnATIC Dreamhack Champions</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2013/11/8199/" id="update_90new_weapons"><span>Introducing 90 New Weapons</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2013/10/7811/" id="update_weapon_workshop"><span>The Weapon Finishes Workshop</span></a>		<a href="http://blog.counter-strike.net/index.php/2013/09/7647/" id="update_bravo"><span>Operation Bravo</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2013/08/7425/" id="update_arms_deal"><span>The Arms Deal Update: CS:GO Economy</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2013/04/6907/" id="update_payback"><span>Operation Payback</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2013/02/6691/" id="update_maps_workshop"><span>Introducing the Maps Workshop</span></a>		<a href="http://blog.counter-strike.net/index.php/resources/" id="update_protips"><span>Pro Tip Series</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2012/10/5565/" id="update_skillgroups"><span>Competitive Skill Groups faq</span></a>
+		<a href="http://blog.counter-strike.net/index.php/2012/08/4690/" id="update_trailer"><span>The CS:GO Trailer</span></a>
+	</div><!-- update history -->
+
+	<!-- resources -->
+	<!-- <div id="sidebar_resources" class="sidebar_item sidebar_container">
+		<div id="title_resources" class="title_sidebar">
+			<img src="http://media.steampowered.com/apps/csgo/blog/images/crosshair.png" />
+			<a href="http://blog.counter-strike.net/?page_id=5303"><h5>RESOURCES</h5></a>
+		</div>
+		<div id="resources" class="sidebar_content">
+			<div class="sidebar_sub_content">
+				<img src="http://media.steampowered.com/apps/csgo/blog/images/thumbnail_csgo_competitive.png" class="sidebar_thumbnail left"/>
+				<div class="left">	
+					<span class="blue bold"><a href="http://www.steampowered.com/v/?area=tourney_limited_signup">TOURNAMENT SIGNUP</a></span>
+					<div class="description_text">Click the link to get started</div>
+				</div>	
+			</div>
+			<div style='clear:both'></div>
+			<div class="sidebar_sub_content">
+				<img src="http://media.steampowered.com/apps/csgo/blog/images/thumbnail_getRight.png" class="sidebar_thumbnail left"/>
+				<div class="left">	
+					<span class="blue bold"><a href="http://blog.counter-strike.net/?page_id=5303#protips">PRO TIP: </a></span><span class="orange bold">GeT_RiGhT</span>
+					<div class="description_text">Backup role on de_inferno</div>
+				</div>	
+			</div>
+			<div style='clear:both'></div>
+			<div class="sidebar_sub_content">
+				<img src="http://media.steampowered.com/apps/csgo/blog/images/thumbnail_de_fuser.png" class="sidebar_thumbnail left"/>
+				<div class="left">	
+					<span class="blue bold"><a href="http://issuu.com/de_fuser/docs/de_fuser_issue_seven?mode=window&backgroundColor=%23222222" target="_blank">COMMUNITY: </a></span><span class="orange bold">de_fuser</span>
+					<div class="description_text">CS:GO Magazine</div>
+				</div>	
+			</div>
+		</div>
+		<div style='clear:both'></div>
+	</div> --> <!-- close resources div -->
+	
+
+	<!-- trailer -->
+	<!-- <div id="sidebar_competitions" class="sidebar_item sidebar_container">
+		<div id="trailer" class="sidebar_content">
+			<a href="http://blog.counter-strike.net/index.php/2012/08/4472/">
+				<img src="http://media.steampowered.com/apps/csgo/blog/images/thumbnail_trailer.png" class="left"/>
+			</a>	
+				<div class="blue bold left trailer_link"><a href="http://blog.counter-strike.net/index.php/2012/08/4472/">CS:GO Trailer</a></div>
+			
+		</div>
+		<div style='clear:both'></div>
+	</div> --> <!-- close trailer div -->
+
+	<!-- valvestore -->
+	<!-- <div id="sidebar_competitions" class="sidebar_item sidebar_container">
+		<div id="valvestore" class="sidebar_content">
+			<a href="http://store.valvesoftware.com/index.php?g=1">
+				<img src="http://media.steampowered.com/apps/csgo/blog/images/csgo_merch_patches.png" class="left"/>
+			</a>	
+				<div class="blue bold left trailer_link"><a href="http://store.valvesoftware.com/index.php?g=1">MERCHANDISE</a></div>
+			
+		</div>
+		<div style='clear:both'></div>
+	</div> --> <!-- close valvestore div -->
+
+		
+
+	<!--?php
+		if(function_exists('dynamic_sidebar') && !isset( $_GET['perfectworld'] ) )
+		{
+			dynamic_sidebar();
+		}
+	? -->
+</div> <!-- close sidebar2 div -->			
+			<div style="clear:both"></div>
+		</div> <!-- close content_container div -->	
+		<div id="footer" style="width: 615px;">
+	<a href="http://www.esrb.org/ratings/" class="esrb"><img src="http://media.steampowered.com/apps/csgo/images/footer_esrb_big.jpg"></a>	<div id="footer_content">
+		<a href="http://www.valvesoftware.com"><img src="http://blog.counter-strike.net/wp-content/themes/counterstrike_launch/images/footer_valve.png"></a>
+		<a href="http://source.valvesoftware.com/"><img src="http://blog.counter-strike.net/wp-content/themes/counterstrike_launch/images/footer_source.png"></a>		<a href="http://www.steampowered.com"><img src="http://blog.counter-strike.net/wp-content/themes/counterstrike_launch/images/footer_steam.png"></a>		<br>
+		<p>© 2017 Valve Corporation, all rights reserved.  Valve, the Valve logo, Source, the Source logo, Steam, the Steam logo, Counter-Strike, and the Counter-Strike logo are trademarks and/or registered trademarks of the Valve Corporation.</p>
+		<script src="http://media.steampowered.com/apps/csgo/blog/js/agever.js"></script>
+	</div>
+	
+<!-- WP Audio player plugin v1.9.4 - https://www.tipsandtricks-hq.com/wordpress-audio-music-player-plugin-4556/ -->
+    <script type="text/javascript">
+        soundManager.useFlashBlock = true; // optional - if used, required flashblock.css
+        soundManager.url = 'http://blog.counter-strike.net/wp-content/plugins/compact-wp-audio-player/swf/soundmanager2.swf';
+        function play_mp3(flg, ids, mp3url, volume, loops)
+        {
+            //Check the file URL parameter value
+            var pieces = mp3url.split("|");
+            if (pieces.length > 1) {//We have got an .ogg file too
+                mp3file = pieces[0];
+                oggfile = pieces[1];
+                //set the file URL to be an array with the mp3 and ogg file
+                mp3url = new Array(mp3file, oggfile);
+            }
+
+            soundManager.createSound({
+                id: 'btnplay_' + ids,
+                volume: volume,
+                url: mp3url
+            });
+
+            if (flg == 'play') {
+                    soundManager.play('btnplay_' + ids, {
+                    onfinish: function() {
+                        if (loops == 'true') {
+                            loopSound('btnplay_' + ids);
+                        }
+                        else {
+                            document.getElementById('btnplay_' + ids).style.display = 'inline';
+                            document.getElementById('btnstop_' + ids).style.display = 'none';
+                        }
+                    }
+                });
+            }
+            else if (flg == 'stop') {
+    //soundManager.stop('btnplay_'+ids);
+                soundManager.pause('btnplay_' + ids);
+            }
+        }
+        function show_hide(flag, ids)
+        {
+            if (flag == 'play') {
+                document.getElementById('btnplay_' + ids).style.display = 'none';
+                document.getElementById('btnstop_' + ids).style.display = 'inline';
+            }
+            else if (flag == 'stop') {
+                document.getElementById('btnplay_' + ids).style.display = 'inline';
+                document.getElementById('btnstop_' + ids).style.display = 'none';
+            }
+        }
+        function loopSound(soundID)
+        {
+            window.setTimeout(function() {
+                soundManager.play(soundID, {onfinish: function() {
+                        loopSound(soundID);
+                    }});
+            }, 1);
+        }
+        function stop_all_tracks()
+        {
+            soundManager.stopAll();
+            var inputs = document.getElementsByTagName("input");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].id.indexOf("btnplay_") == 0) {
+                    inputs[i].style.display = 'inline';//Toggle the play button
+                }
+                if (inputs[i].id.indexOf("btnstop_") == 0) {
+                    inputs[i].style.display = 'none';//Hide the stop button
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" id="scap.flashblock-css" href="http://blog.counter-strike.net/wp-content/plugins/compact-wp-audio-player/css/flashblock.css?ver=4.6.1" type="text/css" media="all">
+<link rel="stylesheet" id="scap.player-css" href="http://blog.counter-strike.net/wp-content/plugins/compact-wp-audio-player/css/player.css?ver=4.6.1" type="text/css" media="all">
+<script type="text/javascript" src="http://blog.counter-strike.net/wp-content/plugins/compact-wp-audio-player/js/soundmanager2-nodebug-jsmin.js?ver=4.6.1"></script>
+</div> <!-- close footer div -->	</div> <!-- close container div -->
+
+
+
+</body>
+
+</html>

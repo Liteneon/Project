@@ -1,28 +1,33 @@
 
+body {
+	background-color:#080725;
 
+	}
 article .line{
 	
-	background-color:#FF0000;
-	border-bottom-color:#FF0000;
+	background-color:#232156;
+	border-bottom-color:#232156;
 	margin:1.3em 0;
+	
 }
 
 footer .line{
 	margin:2em 0;
+	
 }
 
 nav{
-	background:url(img/1.jpg) repeat-x 50% 50% #800000;
+	background:#232156;
 	padding:0 5px;
 	position:absolute;
 	right:0;
 	top:4em;
 
-	border:1px solid #800000;
+	border:1px solid #241fa8;
 
-	-moz-box-shadow:0 1px 1px #333333;
-	-webkit-box-shadow:0 1px 1px #333333;
-	box-shadow:0 1px 1px #333333;
+	-moz-box-shadow:0 1px 1px #02012f;
+	-webkit-box-shadow:0 1px 1px #02012f;
+	box-shadow:0 1px 1px #02012f;
 }
 
 nav ul li{
@@ -31,20 +36,19 @@ nav ul li{
 
 nav ul li a,
 nav ul li a:visited{
-	color:#565656;
+	color:#e9e9e9;
 	display:block;
 	float:left;
 	font-size:1.25em;
 	font-weight:bold;
 	margin:5px 2px;
 	padding:7px 10px 4px;
-	text-shadow:0 1px 1px white;
 	text-transform:uppercase;
 }
 
 nav ul li a:hover{
 	text-decoration:none;
-	background-color:#800000;
+	background-color:#080725;
 }
 
 nav, article, nav ul li a,figure{
@@ -62,11 +66,10 @@ nav, article, nav ul li a,figure{
 }
 
 article{
-	background-color:#800000;
+	background-color:#232156;
 	margin:3em 0;
 	padding:20px;
 
-	text-shadow:0 2px 0 black;
 }
 
 figure{
@@ -79,16 +82,16 @@ figure{
 }
 
 figure:hover{
-	-moz-box-shadow:0 0 2px #4D7788;
-	-webkit-box-shadow:0 0 2px #4D7788;
-	box-shadow:0 0 2px #4D7788;
+	-moz-box-shadow:0 0 2px #800000;
+	-webkit-box-shadow:0 0 2px #800000;
+	box-shadow:0 0 2px #800000;
 }
 
 figure img{
 	margin-left:-60px;
 }
 
-/* Footer styling: */
+
 
 footer{
 	margin-bottom:30px;
@@ -102,8 +105,8 @@ footer p{
 }
 
 footer a,footer a:visited{
-	color:#cccccc;
-	background-color:#213e4a;
+	color:#00000;
+	background-color:#232156;
 	display:block;
 	padding:2px 4px;
 	z-index:100;
@@ -112,7 +115,7 @@ footer a,footer a:visited{
 
 footer a:hover{
 	text-decoration:none;
-	background-color:#142830;
+	background-color:#232156;
 }
 
 footer a.by{
