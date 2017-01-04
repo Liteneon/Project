@@ -1,15 +1,9 @@
-header,footer,
-article,section,
-hgroup,nav,
-figure{
-	
-	display:block;
-}
+
 
 article .line{
 	
-	background-color:#15242a;
-	border-bottom-color:#204656;
+	background-color:#FF0000;
+	border-bottom-color:#FF0000;
 	margin:1.3em 0;
 }
 
@@ -18,13 +12,13 @@ footer .line{
 }
 
 nav{
-	background:url(img/gradient_light.jpg) repeat-x 50% 50% #f8f8f8;
+	background:url(img/1.jpg) repeat-x 50% 50% #800000;
 	padding:0 5px;
 	position:absolute;
 	right:0;
 	top:4em;
 
-	border:1px solid #FCFCFC;
+	border:1px solid #800000;
 
 	-moz-box-shadow:0 1px 1px #333333;
 	-webkit-box-shadow:0 1px 1px #333333;
@@ -50,7 +44,7 @@ nav ul li a:visited{
 
 nav ul li a:hover{
 	text-decoration:none;
-	background-color:#f0f0f0;
+	background-color:#800000;
 }
 
 nav, article, nav ul li a,figure{
@@ -68,7 +62,7 @@ nav, article, nav ul li a,figure{
 }
 
 article{
-	background-color:#213E4A;
+	background-color:#800000;
 	margin:3em 0;
 	padding:20px;
 
